@@ -11,31 +11,31 @@
         </div>
         <div class="col-md-6 mt-5">
             <h3 class="text-center">Sign In</h3>
-            <form action="" method="POST" id="signin" novalidate>
+            <form action="{{ route('signin')}}" method="POST" id="signin" novalidate>
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" name="email" id="email" placeholder="Enter your Email" value="{{old('email')}}">
-                    {{-- @if ($errors->has('email'))
+                    @if ($errors->has('email'))
                         <span class="text-danger">*{{ $errors->first('email') }}</span>
-                    @endif --}}
+                    @endif
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password">
-                    {{-- @if ($errors->has('password'))
+                    @if ($errors->has('password'))
                         <span class="text-danger">*{{ $errors->first('password') }}</span>
-                    @endif --}}
+                    @endif
                 </div>
                 <button type="submit" class="btn btn-primary" name="submit">Sign In</button>
                 <a href="{{route('showsignup')}}" class="ms-2 text-decoration-none">create account</a>
             </form>
-            {{-- @if(Session::has('logerror'))
+            @if(Session::has('logerror'))
             <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
                 <span>{{Session::get('logerror')}}</span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        @endif --}}
+        @endif
         </div>
     </div>
 @endsection

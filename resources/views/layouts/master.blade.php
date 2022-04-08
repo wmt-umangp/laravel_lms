@@ -22,13 +22,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"
         integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="{{URL::to('css/main.css')}}">
-    {{-- {{-- <script src="{{URL::to('js/app.js')}}"></script> --}}
+    <script src="{{URL::to('js/app.js')}}"></script>
     <script src="{{URL::to('js/FormValidate.js')}}"></script>
 </head>
 
 <body>
     @include('includes.header')
+    <div id="divbg">
+        @yield('bg_img')
+    </div>
     <div class="container">
         @yield('content')
     </div>

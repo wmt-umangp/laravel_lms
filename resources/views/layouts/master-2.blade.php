@@ -24,6 +24,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="{{URL::to('css/main.css')}}">
     <script src="{{URL::to('js/FormValidate.js')}}"></script>
+    <script src="{{URL::to('js/app.js')}}"></script>
 </head>
 
 <body>

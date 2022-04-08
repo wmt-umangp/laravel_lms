@@ -78,5 +78,45 @@ $(document).ready(function () {
             form.submit();
         }
     });
+
+    $.validator.addMethod('filesize', function (value, element, param) {
+        return this.optional(element) || (element.files[0].size <= param * 1000000)
+    }, 'File size must be less than {0} MB');
+
+    $('#account').validate({
+        rules: {
+            'fname':{
+                required:true,
+                lettersonly:true,
+            },
+            'lname':{
+                required:true,
+                lettersonly:true,
+            },
+            'image':{
+                required:true,
+                extension: "jpg|jpeg|png|gif",
+                filesize: 3,
+            }
+        },
+        messages: {
+            'fname':{
+                required:'Please Enter First Name!!',
+                lettersonly: 'First Name Must be in letters only!!'
+            },
+            'lname':{
+                required:'Please Enter Name!!',
+                lettersonly: 'Last Name Must be in letters only!!'
+            },
+            'image':{
+                required:'Please Choose Image!!',
+                extension: 'Only image type jpg/png/jpeg/gif is allowed!!',
+                filesize: 'File Size Must be less than 3MB'
+            }
+        },
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
 });
 
