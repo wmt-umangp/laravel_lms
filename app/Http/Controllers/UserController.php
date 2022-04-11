@@ -35,7 +35,7 @@ class UserController extends Controller
         $user->save();
 
         Auth::login($user);
-        // Session::put('log',$email);
+        Session::put('log',$email);
         // dd($user);
         return redirect()->route('dashboard')->with('rmsg','Great! You have Successfully loggedin');;
     }
@@ -49,7 +49,7 @@ class UserController extends Controller
         $email=$req->input('email');
         $password=$req->input('password');
         if(Auth::attempt(['email' => $email, 'password' => $password])){
-            // Session::put('log',$email);
+            Session::put('log',$email);
             return redirect()->route('dashboard')->with('logined','You have Successfully loggedin');
         }
         return redirect()->back()->with('logerror','Invalid User Credentials');
@@ -82,7 +82,7 @@ class UserController extends Controller
     }
     public function getLogout(){
         Auth::logout();
-        // session::flush();
+        session::flush();
         return redirect()->route('showsignin');
     }
 }

@@ -10,13 +10,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-5">
                     <li class="nav-item me-4">
-                        <a class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}" href="{{route('dashboard')}}">Home</a>
+                        <a class="nav-link {{(request()->is('dashboard')) ? 'active' : '' }}" href="{{route('dashboard')}}">Home</a>
                     </li>
                     <li class="nav-item me-4">
                         <a class="nav-link " href="#">Book</a>
                     </li>
                     <li class="nav-item me-4">
-                        <a class="nav-link {{ Route::is('showauthors') ? 'active' : '' }}" href="{{route('showauthors')}}">Author</a>
+                        <a class="nav-link {{ (request()->is('authors*')) ? 'active' : '' }}" href="{{route('showauthors')}}">Author</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0">
