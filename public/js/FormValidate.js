@@ -172,5 +172,125 @@ $(document).ready(function () {
             form.submit();
         }
     });
+
+
+    $('#edit_author_form').validate({
+        rules: {
+            a_fname: {
+                required: true
+            },
+            a_lname: {
+                required: true,
+            },
+            a_dob: {
+                required: true,
+            },
+            a_gen:{
+                required: true
+            },
+            a_address:{
+                required: true
+            },
+            a_mobile_no:{
+                required: true,
+                number: true
+            },
+            a_desc:{
+                required: true
+            }
+        },
+        messages: {
+            a_fname: {
+                required: 'Please Enter Authors First Name',
+            },
+            a_lname: {
+                required: 'Please Enter Authors last Name',
+            },
+            a_dob: {
+                required: 'Please Select Authors Date of Birth',
+            },
+            a_gen:{
+                required: 'Please Select Gender of Author'
+            },
+            a_address:{
+                required: 'Please Enter Address of Author'
+            },
+            a_mobile_no:{
+                required: 'Please Enter Mobile no of Author',
+                number: 'Mobile no should be in numbers only'
+            },
+            a_desc:{
+                required: 'Please Enter Description about author'
+            }
+        },
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
+
+    $('#add_book_form').validate({
+        rules: {
+            b_title: {
+                required: true
+            },
+            b_pages: {
+                required: true,
+                number: true
+            },
+            b_lang: {
+                required: true
+            },
+            b_author: {
+                required: true
+            },
+            b_img: {
+                required: true
+            },
+            b_isbn: {
+                required: true,
+                maxlength: 13
+            },
+            b_desc: {
+                required: true
+            },
+            b_price:{
+                required: true,
+                number: true
+            },
+        },
+        messages: {
+            b_title: {
+                required: 'Please Enter Book Title'
+            },
+            b_pages: {
+                required: 'Please Enter Number of Pages in Book',
+                number: 'Pages Should be in numbers only'
+            },
+            b_lang: {
+                required: 'Please Enter Book Language'
+            },
+            b_author: {
+                required: 'Please select Author Name of Book'
+            },
+            b_img: {
+                required: 'Please Select Cover Image of Book'
+            },
+            b_isbn: {
+                required: 'Please Enter ISBN Number of Book',
+                maxlength: 'Length of ISBN number should be 13 digit'
+            },
+            b_desc: {
+                required: 'Please Enter Description of Book'
+            },
+            b_price:{
+                required:'Please Enter Book Price',
+                number: 'Book Price Should be in number only'
+            },
+        },
+
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
 });
 

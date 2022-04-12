@@ -6,6 +6,9 @@
 
 @section('content')
     @include('includes.toastr')
+    <head>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+    </head>
     <div class="row mt-5">
         <div class="col-6 offset-3 text-center mt-5">
             <h3 class="mt-5">List of Authors</h3>
@@ -27,6 +30,7 @@
                           <th>Name</th>
                           <th>DOB</th>
                           <th>Address</th>
+                          <th>Status</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -37,10 +41,13 @@
                                 <td>{{$ab->auth_fname}}</td>
                                 <td>{{ \Carbon\Carbon::createFromTimestamp(strtotime($ab->auth_dob))->format('d-m-Y')}}</td>
                                 <td class="text-break" style="width:500px;">{{$ab->auth_address}}</td>
+                                <td>
+                                    <input data-id="{{$ab->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $ab->auth_status ? 'checked' : '' }}>
+                                </td>
                                 <td class="text-center">
                                     <span> <a href="#" data-showid={{$ab->id}} class="showauthor"><i class="fa-solid fa-circle-info text-light"></i></a></span>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span> <a href=""><i class="fa-solid fa-pen-to-square text-light"></i></a></span>
+                                    <span> <a href="{{route('showeditauthor',['uid'=>$ab->id])}}"><i class="fa-solid fa-pen-to-square text-light"></i></a></span>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <form method="POST" action="{{route('deleteauthor',['did'=>$ab->id])}}" style="display:inline !important;">
                                         @csrf
@@ -58,7 +65,13 @@
         </div>
     </div>
     <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
            $('.show_confirm').click(function(event) {
+
           var form =  $(this).closest("form");
           var name = $(this).data("name");
           event.preventDefault();
@@ -82,20 +95,48 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Description</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Author Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="editmodal">
-                    <div class="form-group">
-                        <label for="post-body">Edit The Post</label>
-                        <textarea name="post-body" id="post-body" cols="30" rows="5" class="form-control" style="resize:none;"></textarea>
-                    </div>
-                </form>
+               <table class="table table-striped table-dark table-hover">
+                   <tr>
+                       <td>Author's First Name: </td>
+                       <td><span class="fname "></span></td>
+                   </tr>
+                   <tr>
+                       <td>Author's Last Name: </td>
+                       <td><span class="lname"></span></td>
+                   </tr>
+                   <tr>
+                       <td>Author's Date of Birth: </td>
+                       <td><span class="dob"></span></td>
+                   </tr>
+                   <tr>
+                       <td>Author's Gender: </td>
+                       <td><span class="gen"></span></td>
+                   </tr>
+                   <tr>
+                       <td>Author's Address: </td>
+                       <td><span class="address"></span></td>
+                   </tr>
+                   <tr>
+                       <td>Author's Mobile: </td>
+                       <td><span class="mobile"></span></td>
+                   </tr>
+                   <tr>
+                       <td>Author's Description: </td>
+                       <td><span class="desc"></span></td>
+                   </tr>
+                   <tr>
+                       <td>Author's Status: </td>
+                       <td><span class="status"></span></td>
+                   </tr>
+               </table>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" id="modal-save">Save changes</button>
             </div>
         </div>
     </div>
@@ -103,7 +144,7 @@
 
 <script>
     var showroute="{{route('showauthordetails')}}"
-    var token=""
+    var status=""
     $('.showauthor').click(function(event){
         event.preventDefault();
         authorId=$(this).attr("data-showid");
@@ -111,12 +152,45 @@
         $.ajax({
             url:showroute,
             method:"POST",
-            token:token,
             data:{
                 authorid:authorId,
             },
             success:function(data){
-                console.log('success:');
+                // console.log('success:',data['auth_fname']);
+                $('.fname').html(data['auth_fname']);
+                $('.lname').html(data['auth_lname']);
+                $('.dob').html(data['auth_dob']);
+                $('.gen').html(data['auth_gen']);
+                $('.address').html(data['auth_address']);
+                $('.mobile').html(data['auth_mobile']);
+                $('.desc').html(data['auth_desc']);
+                if(data['auth_status']==1){
+                    status="Active"
+
+                }
+                else{
+                    status="Inactive"
+
+                }
+                $('.status').html(status);
+                $('#exampleModal').modal('show');
+            }
+        });
+    });
+
+
+    // for author status
+    $('.toggle-class').change(function() {
+        var status = $(this).prop('checked') == true ? 1 : 0;
+        var author_id = $(this).data('id');
+
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "{{route('changestatus')}}",
+            data: {'status': status, 'author_id': author_id},
+            success: function(data){
+              console.log(data.success)
             }
         });
     });

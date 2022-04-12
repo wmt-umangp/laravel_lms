@@ -13,7 +13,7 @@
                         <a class="nav-link {{(request()->is('dashboard')) ? 'active' : '' }}" href="{{route('dashboard')}}">Home</a>
                     </li>
                     <li class="nav-item me-4">
-                        <a class="nav-link " href="#">Book</a>
+                        <a class="nav-link {{(request()->is('books*')) ? 'active' : '' }}" href="{{route('showbooks')}}">Book</a>
                     </li>
                     <li class="nav-item me-4">
                         <a class="nav-link {{ (request()->is('authors*')) ? 'active' : '' }}" href="{{route('showauthors')}}">Author</a>

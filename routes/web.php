@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
 
 
 // for registration
@@ -31,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/authors',[AuthorController::class,'getAuthors'])->name('showauthors');
 
 
-    //for author form display
+    //for add author form display
     Route::get('/authors/addauthordisplay',[AuthorController::class,'getAddAuthorForm'])->name('addauthor');
 
 
@@ -41,7 +42,26 @@ Route::middleware('auth')->group(function () {
     // for author delete
     Route::delete('/authors/deleteauthors/{did}', [AuthorController::class, 'authorDelete'])->name('deleteauthor');
 
+    //for show author details page
     Route::post('/authors/showauthordetails',[AuthorController::class,'showAuthorDetails'])->name('showauthordetails');
+
+    //for show edit author form
+    Route::get('/authors/showeditauthor/{uid}',[AuthorController::class,'showEditAuthor'])->name('showeditauthor');
+
+    // for edit author controller
+    Route::post('/authors/editauthor/{uid}',[AuthorController::class,'editAuthor'])->name('editauthor');
+
+    //for author status
+    Route::get('/authors/authorstatus',[AuthorController::class,'changeStatus'])->name('changestatus');
+
+    //for Books Display
+    Route::get('/books',[BookController::class,'getBooks'])->name('showbooks');
+
+     //for add Book form display
+     Route::get('/books/addbooksdisplay',[BookController::class,'getAddBookForm'])->name('addbook');
+
+    //for add book controller
+    Route::post('/books/addbooks',[BookController::class,'addBook'])->name('addbooksave');
 });
 
 
