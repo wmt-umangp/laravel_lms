@@ -35,7 +35,18 @@
                         </tr>
                       </thead>
                       <tbody>
-
+                            @foreach ($books as $b=>$bk)
+                                <tr>
+                                    <td>{{$b+1}}</td>
+                                    <td>{{$bk->book_img}}</td>
+                                    <td>{{$bk->book_title}}</td>
+                                    <td>{{$bk}}</td>
+                                    <td>{{$bk->book_price}}</td>
+                                    <td>{{$bk->book_isbn}}</td>
+                                    <td>{{$bk->book_status}}</td>
+                                    <td>{{'Edit Delete'}}</td>
+                                </tr>
+                            @endforeach
                       </tbody>
                 </table>
               </div>

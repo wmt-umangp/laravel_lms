@@ -28,9 +28,9 @@ class EditAuthorFormRequest extends FormRequest
             'a_lname'=>'required|max:120|regex:/^[\pL\s\-]+$/u',
             'a_dob'=>'required',
             'a_gen'=>'required',
-            'a_address'=>'required',
+            'a_address'=>'required|max:300',
             'a_mobile_no'=>'required|min:10|numeric',
-            'a_desc'=>'required'
+            'a_desc'=>'required|max:300'
         ];
     }
     public function messages()
@@ -45,10 +45,12 @@ class EditAuthorFormRequest extends FormRequest
             'a_dob.required'=>'Please Choose Date of Birth',
             'a_gen.required'=>'Please Choose Gender',
             'a_address.required'=>'Please Enter Address',
+            'a_address.max'=>'Maximum 300 characters allowed',
             'a_mobile_no.required'=>'Please Enter Mobile No.',
             'a_mobile_no.min'=>'Minimum 10 characters required',
             'a_mobile_no.numeric'=>'Mobile Number Must be in Digits only',
-            'a_desc.required'=>'Please Enter Author\'s Description'
+            'a_desc.required'=>'Please Enter Author\'s Description',
+            'a_desc.max'=>'Maximum 300 characters allowed',
         ];
     }
 }

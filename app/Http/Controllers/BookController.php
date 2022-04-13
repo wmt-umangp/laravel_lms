@@ -10,7 +10,8 @@ use App\Models\Author;
 class BookController extends Controller
 {
     public function getBooks(){
-        return view('books.showbook',['books'=>Book::orderBy('created_at','desc')->get()]);
+        $books=Book::orderBy('created_at','desc')->with('authors')->get();
+        return view('books.showbook',['books'=>$books]);
     }
     public function getAddBookForm(){
         $author=Author::all();

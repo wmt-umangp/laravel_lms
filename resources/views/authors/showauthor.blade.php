@@ -23,39 +23,38 @@
     <div class="row">
         <div class="col-12">
             <div class="table-responsive mt-5">
-                <table class="table table-bordered border-light mt-5 table-dark" id="showauthor">
+                <table class="table border-2 border-light mt-5 table-dark" id="showauthor">
                     <thead>
                         <tr class="text-center">
-                          <th>#</th>
-                          <th>Name</th>
-                          <th>DOB</th>
-                          <th>Address</th>
-                          <th>Status</th>
-                          <th>Action</th>
+                          <th class="border-1 border-light">#</th>
+                          <th class="border-1 border-light">Name</th>
+                          <th class="border-1 border-light">DOB</th>
+                          <th class="border-1 border-light">Address</th>
+                          <th class="border-1 border-light">Status</th>
+                          <th class="border-1 border-light">Action</th>
                         </tr>
                       </thead>
                       <tbody>
                           @foreach ($author as $a=>$ab)
                             <tr class="text-center">
-                                <td>{{$a+1}}</td>
-                                <td>{{$ab->auth_fname}}</td>
-                                <td>{{ \Carbon\Carbon::createFromTimestamp(strtotime($ab->auth_dob))->format('d-m-Y')}}</td>
-                                <td class="text-break" style="width:500px;">{{$ab->auth_address}}</td>
-                                <td>
+                                <td class="border-1 border-light">{{$a+1}}</td>
+                                <td class="border-1 border-light"> <a href="#" data-showid={{$ab->id}} class="text-decoration-none text-light showauthor">{{$ab->auth_fname}}</a></td>
+                                <td class="border-1 border-light">{{ \Carbon\Carbon::createFromTimestamp(strtotime($ab->auth_dob))->format('d-m-Y')}}</td>
+                                <td class="text-break border-1 border-light" style="width:500px;"><pre><span style="font-size:18px;font-family: Sans-serif">{{$ab->auth_address}}</span></pre></td>
+                                <td class="border-1 border-light">
                                     <input data-id="{{$ab->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $ab->auth_status ? 'checked' : '' }}>
                                 </td>
-                                <td class="text-center">
-                                    <span> <a href="#" data-showid={{$ab->id}} class="showauthor"><i class="fa-solid fa-circle-info text-light"></i></a></span>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span> <a href="{{route('showeditauthor',['uid'=>$ab->id])}}"><i class="fa-solid fa-pen-to-square text-light"></i></a></span>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <form method="POST" action="{{route('deleteauthor',['did'=>$ab->id])}}" style="display:inline !important;">
-                                        @csrf
-                                            <input name="_method" type="hidden" value="DELETE" style="display: inline !important;" >
-                                            <button type="submit" class="btn show_confirm border-0" style="display: inline !important; "  data-toggle="tooltip" title='Delete'>
-                                                <i class="fa-solid fa-trash-can text-light"></i>
-                                            </button>
-                                    </form>
+                                <td class="text-center border-1 border-light">
+                                    <div class="d-flex flex-row justify-content-evenly">
+                                        <span> <a href="{{route('showeditauthor',['uid'=>$ab->id])}}" class="btn"><i class="fa-solid fa-pen-to-square text-light"></i></a></span>
+                                        <form method="POST" action="{{route('deleteauthor',['did'=>$ab->id])}}" style="display:inline !important;">
+                                            @csrf
+                                                <input name="_method" type="hidden" value="DELETE" style="display: inline !important;" >
+                                                <button type="submit" class="btn show_confirm border-0" style="display: inline !important; "  data-toggle="tooltip" title='Delete'>
+                                                    <i class="fa-solid fa-trash-can text-light"></i>
+                                                </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                           @endforeach
@@ -92,7 +91,7 @@
 
  {{-- Modal for show Author Details--}}
  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Author Details</h5>
@@ -101,7 +100,7 @@
             <div class="modal-body">
                <table class="table table-striped table-dark table-hover">
                    <tr>
-                       <td>Author's First Name: </td>
+                       <td style="width:300px;">Author's First Name: </td>
                        <td><span class="fname "></span></td>
                    </tr>
                    <tr>
@@ -159,7 +158,7 @@
                 // console.log('success:',data['auth_fname']);
                 $('.fname').html(data['auth_fname']);
                 $('.lname').html(data['auth_lname']);
-                $('.dob').html(data['auth_dob']);
+                $('.dob').html($.date(data['auth_dob']));
                 $('.gen').html(data['auth_gen']);
                 $('.address').html(data['auth_address']);
                 $('.mobile').html(data['auth_mobile']);
@@ -176,6 +175,21 @@
                 $('#exampleModal').modal('show');
             }
         });
+        $.date = function(dateObject) {
+            var d = new Date(dateObject);
+            var day = d.getDate();
+            var month = d.getMonth() + 1;
+            var year = d.getFullYear();
+            if (day < 10) {
+                day = "0" + day;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            var date = day + "/" + month + "/" + year;
+
+            return date;
+        };
     });
 
 

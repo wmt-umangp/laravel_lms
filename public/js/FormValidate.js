@@ -134,14 +134,16 @@ $(document).ready(function () {
                 required: true
             },
             a_address:{
-                required: true
+                required: true,
+                maxlength: 300
             },
             a_mobile_no:{
                 required: true,
                 number: true
             },
             a_desc:{
-                required: true
+                required: true,
+                maxlength: 300
             }
         },
         messages: {
@@ -158,14 +160,16 @@ $(document).ready(function () {
                 required: 'Please Select Gender of Author'
             },
             a_address:{
-                required: 'Please Enter Address of Author'
+                required: 'Please Enter Address of Author',
+                maxlength: 'Maximum 300 characters allowed'
             },
             a_mobile_no:{
                 required: 'Please Enter Mobile no of Author',
                 number: 'Mobile no should be in numbers only'
             },
             a_desc:{
-                required: 'Please Enter Description about author'
+                required: 'Please Enter Description about author',
+                maxlength: 'Maximum 300 characters allowed'
             }
         },
         submitHandler: function (form) {
@@ -189,14 +193,16 @@ $(document).ready(function () {
                 required: true
             },
             a_address:{
-                required: true
+                required: true,
+                maxlength: 300
             },
             a_mobile_no:{
                 required: true,
                 number: true
             },
             a_desc:{
-                required: true
+                required: true,
+                maxlength: 300
             }
         },
         messages: {
@@ -213,14 +219,16 @@ $(document).ready(function () {
                 required: 'Please Select Gender of Author'
             },
             a_address:{
-                required: 'Please Enter Address of Author'
+                required: 'Please Enter Address of Author',
+                maxlength: 'Maximum 300 characters allowed'
             },
             a_mobile_no:{
                 required: 'Please Enter Mobile no of Author',
                 number: 'Mobile no should be in numbers only'
             },
             a_desc:{
-                required: 'Please Enter Description about author'
+                required: 'Please Enter Description about author',
+                maxlength: 'Maximum 300 characters allowed'
             }
         },
         submitHandler: function (form) {
