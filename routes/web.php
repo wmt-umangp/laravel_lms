@@ -62,6 +62,15 @@ Route::middleware('auth')->group(function () {
 
     //for add book controller
     Route::post('/books/addbooks',[BookController::class,'addBook'])->name('addbooksave');
+
+    //for book delete
+    Route::delete('/books/deletebooks/{bdid}', [BookController::class, 'bookDelete'])->name('deletebook');
+
+     //for show edit Book form
+     Route::get('/books/showeditbook/{buid}',[BookController::class,'showEditbook'])->name('showeditbook');
+
+     // for edit book controller
+     Route::post('/books/editbook/{buid}',[BookController::class,'editBook'])->name('editbook');
 });
 
 

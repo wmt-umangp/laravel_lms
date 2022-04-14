@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddBookFormRequest extends FormRequest
+class EditBookFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,8 +28,8 @@ class AddBookFormRequest extends FormRequest
             'b_pages'=>'required|numeric',
             'b_lang'=>'required|regex:/^[\pL\s\-]+$/u',
             'b_author'=>'required',
-            'b_img' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:3000',
-            'b_isbn'=>'required|unique:books,book_isbn',
+            'b_img' =>'required|image|mimes:jpg,png,jpeg,gif,svg|max:3000',
+            'b_isbn'=>'required',
             'b_desc'=>'required|max:300',
             'b_price'=>'required|numeric',
         ];
@@ -47,9 +47,8 @@ class AddBookFormRequest extends FormRequest
             'b_img.mimes' =>'allowed image types are: jpg,png,jpeg,gif,svg',
             'b_img.max' =>'Image size must be less than 3MB',
             'b_isbn.required'=>'Please Enter ISBN',
-            'b_isbn.unique'=>'Book with ISBN is already exists',
             'b_desc.required'=>'Please Enter Description of Book',
-            'b_desc.max'=>'maximum 300 characters allowed',
+            'b_desc.max'=>'Maximum 300 characters allowed',
             'b_price.required'=>'Please Enter Price of Book',
             'b_price.numeric'=>'Book Price must be in digits only',
         ];

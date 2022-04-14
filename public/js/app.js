@@ -31,4 +31,11 @@ $(document).ready(function(){
             { "orderable": false, "targets": [5,6,7] }
           ]
     });
+
+    var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+    removeItemButton: true,
+    maxItemCount:5,
+    searchResultLimit:10,
+    renderChoiceLimit:10
+    });
 });
