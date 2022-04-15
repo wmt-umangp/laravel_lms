@@ -38,24 +38,29 @@
                           @foreach ($author as $a=>$ab)
                             <tr class="text-center">
                                 <td class="border-1 border-light">{{$a+1}}</td>
-                                <td class="border-1 border-light"> <a href="#" data-showid={{$ab->id}} class="text-decoration-none text-light showauthor">{{$ab->auth_fname}}</a></td>
+                                <td class="border-1 border-light"> <a href="#" data-showid={{$ab->id}} class="text-decoration-none text-light showauthor">{{ucfirst($ab->auth_fname)}} {{ucfirst($ab->auth_lname)}}</a></td>
                                 <td class="border-1 border-light">{{ \Carbon\Carbon::createFromTimestamp(strtotime($ab->auth_dob))->format('d-m-Y')}}</td>
-                                <td class="text-break border-1 border-light" style="width:500px;"><pre><span style="font-size:18px;font-family: Sans-serif">{{$ab->auth_address}}</span></pre></td>
-                                <td class="border-1 border-light">
-                                    <input data-id="{{$ab->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $ab->auth_status ? 'checked' : '' }}>
-                                </td>
-                                <td class="text-center border-1 border-light">
-                                    <div class="d-flex flex-row justify-content-evenly">
-                                        <span> <a href="{{route('showeditauthor',['uid'=>$ab->id])}}" class="btn"><i class="fa-solid fa-pen-to-square text-light"></i></a></span>
-                                        <form method="POST" action="{{route('deleteauthor',['did'=>$ab->id])}}" style="display:inline !important;">
-                                            @csrf
-                                                <input name="_method" type="hidden" value="DELETE" style="display: inline !important;" >
-                                                <button type="submit" class="btn show_confirm border-0" style="display: inline !important; "  data-toggle="tooltip" title='Delete'>
-                                                    <i class="fa-solid fa-trash-can text-light"></i>
-                                                </button>
-                                        </form>
-                                    </div>
-                                </td>
+                                <td class="text-break border-1 border-light" style="width:500px;"><pre><span style="font-size:18px;font-family: Sans-serif">{!!Str::limit($ab->auth_address,35)!!}</span></pre></td>
+                                @if (Auth::user()->id==$ab->user_id)
+                                    <td class="border-1 border-light">
+                                        <input data-id="{{$ab->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $ab->auth_status ? 'checked' : '' }}>
+                                    </td>
+                                    <td class="text-center border-1 border-light">
+                                        <div class="d-flex flex-row justify-content-evenly">
+                                            <span> <a href="{{route('showeditauthor',['uid'=>$ab->id])}}" class="btn"><i class="fa-solid fa-pen-to-square text-light"></i></a></span>
+                                            <form method="POST" action="{{route('deleteauthor',['did'=>$ab->id])}}" style="display:inline !important;">
+                                                @csrf
+                                                    <input name="_method" type="hidden" value="DELETE" style="display: inline !important;" >
+                                                    <button type="submit" class="btn show_confirm border-0" style="display: inline !important; "  data-toggle="tooltip" title='Delete'>
+                                                        <i class="fa-solid fa-trash-can text-light"></i>
+                                                    </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                @else
+                                    <td class="border-1 border-light">No Allowed</td>
+                                    <td class="border-1 border-light">No Allowed</td>
+                                @endif
                             </tr>
                           @endforeach
                       </tbody>

@@ -57,8 +57,8 @@ Route::middleware('auth')->group(function () {
     //for Books Display
     Route::get('/books',[BookController::class,'getBooks'])->name('showbooks');
 
-     //for add Book form display
-     Route::get('/books/addbooksdisplay',[BookController::class,'getAddBookForm'])->name('addbook');
+    //for add Book form display
+    Route::get('/books/addbooksdisplay',[BookController::class,'getAddBookForm'])->name('addbook');
 
     //for add book controller
     Route::post('/books/addbooks',[BookController::class,'addBook'])->name('addbooksave');
@@ -71,6 +71,12 @@ Route::middleware('auth')->group(function () {
 
      // for edit book controller
      Route::post('/books/editbook/{buid}',[BookController::class,'editBook'])->name('editbook');
+
+    //for book status
+    Route::get('/books/bookstatus',[BookController::class,'changebookStatus'])->name('changebookstatus');
+
+      //for show Book details page
+      Route::post('/books/showbookdetails',[BookController::class,'showBookDetails'])->name('showbookdetails');
 });
 
 

@@ -78,7 +78,7 @@
                     @endif
                     </div>
 
-                    <div class="mb-3 mt-3">
+                    {{-- <div class="mb-3 mt-3">
                         <div class="row">
                             <div class="col-1">  <label for="a_status" class="mb-1">Status: </label></div>
                             <div class="col-3 col-sm-1">
@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <button type="submit" class="btn btn-primary" id="add_author" name="add_author">Add
                         Author</button>

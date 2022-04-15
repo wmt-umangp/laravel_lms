@@ -6,17 +6,12 @@ $(document).ready(function(){
             return $('input', td).prop('checked') ? '1' : '0';
         } );
     }
-
     // var postBodyElement=null;
     $("[data-bs-toggle='tooltip']").tooltip();
 
     $('#showauthor').DataTable({
         "columns": [
-            null,
-            { "orderDataType": "dom-text-numeric" },
-            { "orderDataType": "dom-text", type: 'string' },
-            { "orderDataType": "dom-select" },
-            { "orderDataType": "dom-checkbox" },
+            null,null,null,null,{ "orderDataType": "dom-checkbox" },
         ],
         "iDisplayLength": 5,
         "bLengthChange": false,
@@ -25,11 +20,14 @@ $(document).ready(function(){
           ]
     });
     $('#showbook').DataTable({
+          "columns": [null,null,null,null,null,null,
+            { "orderDataType": "dom-checkbox" },
+        ],
         "iDisplayLength": 5,
         "bLengthChange": false,
         "columnDefs": [
-            { "orderable": false, "targets": [5,6,7] }
-          ]
+            { "orderable": false, "targets": [7] }
+        ],
     });
 
     var multipleCancelButton = new Choices('#choices-multiple-remove-button', {

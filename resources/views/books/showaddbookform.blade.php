@@ -40,7 +40,7 @@ Add Book
                         <select name="b_author[]"  id="choices-multiple-remove-button" placeholder="Select Book's Authors" multiple>
                             @foreach ($author as $a)
                                 <option value="{{$a->id}}">
-                                    {{$a->auth_fname}}
+                                    {{$a->auth_fname}}{{" ".$a->auth_lname}}
                                 </option>
                             @endforeach
                         </select>
@@ -78,24 +78,6 @@ Add Book
                             <span class="text-danger">*{{ $errors->first('b_price') }}</span>
                         @endif
                     </div>
-
-
-                    <div class="mb-3 mt-3">
-                        <div class="row">
-                            <div class="col-1"> <label for="b_status" class="mb-1">Status: </label></div>
-                            <div class="col-3 col-sm-1">
-                                <label class="ms-4 ms-sm-0 me-0">Inactive</label>
-                            </div>
-                            <div class="col-2">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="b_status"
-                                       value="1" name="b_status">
-                                    <label class="form-check-label" for="flexSwitchCheckChecked">Active</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <button type="submit" class="btn btn-primary" id="add_book" name="add_book">Add
                         Book</button>
                     <a type="button" href="{{route('showbooks')}}" class="btn btn-danger" id="b_cancel"
