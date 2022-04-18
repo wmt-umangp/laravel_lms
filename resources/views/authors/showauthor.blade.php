@@ -58,8 +58,8 @@
                                         </div>
                                     </td>
                                 @else
-                                    <td class="border-1 border-light">No Allowed</td>
-                                    <td class="border-1 border-light">No Allowed</td>
+                                    <td class="border-1 border-light">Not Allowed</td>
+                                    <td class="border-1 border-light">Not Allowed</td>
                                 @endif
                             </tr>
                           @endforeach

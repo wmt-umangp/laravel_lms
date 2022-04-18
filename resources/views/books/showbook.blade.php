@@ -54,21 +54,26 @@
                                         @endphp
                                     </td>
                                     <td class="border-1 border-light">{{$bk->book_isbn}}</td>
-                                    <td class="border-1 border-light">
-                                        <input data-id="{{$bk->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $bk->book_status ? 'checked' : '' }}>
-                                    </td>
-                                    <td class="text-center border-1 border-light">
-                                        <div class="d-flex flex-row justify-content-evenly">
-                                            <span> <a href="{{route('showeditbook',['buid'=>$bk->id])}}" class="btn"><i class="fa-solid fa-pen-to-square text-light"></i></a></span>
-                                            <form method="POST" action="{{route('deletebook',['bdid'=>$bk->id])}}" style="display:inline !important;">
-                                                @csrf
-                                                    <input name="_method" type="hidden" value="DELETE" style="display: inline !important;" >
-                                                    <button type="submit" class="btn show_confirm border-0" style="display: inline !important; "  data-toggle="tooltip" title='Delete'>
-                                                        <i class="fa-solid fa-trash-can text-light"></i>
-                                                    </button>
-                                            </form>
-                                        </div>
-                                    </td>
+                                    @if (Auth::user()->id==$bk->user_id)
+                                        <td class="border-1 border-light">
+                                            <input data-id="{{$bk->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $bk->book_status ? 'checked' : '' }}>
+                                        </td>
+                                        <td class="text-center border-1 border-light">
+                                            <div class="d-flex flex-row justify-content-evenly">
+                                                <span> <a href="{{route('showeditbook',['buid'=>$bk->id])}}" class="btn"><i class="fa-solid fa-pen-to-square text-light"></i></a></span>
+                                                <form method="POST" action="{{route('deletebook',['bdid'=>$bk->id])}}" style="display:inline !important;">
+                                                    @csrf
+                                                        <input name="_method" type="hidden" value="DELETE" style="display: inline !important;" >
+                                                        <button type="submit" class="btn show_confirm border-0" style="display: inline !important; "  data-toggle="tooltip" title='Delete'>
+                                                            <i class="fa-solid fa-trash-can text-light"></i>
+                                                        </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    @else
+                                        <td class="border-1 border-light">Not Allowed</td>
+                                        <td class="border-1 border-light">Not Allowed</td>
+                                    @endif
                                 </tr>
                             @endforeach
                       </tbody>
